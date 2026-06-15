@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TV Sebrae SAJ</title>
+
+  <style>
+    :root {
+      --azul-sebrae: #005eb8;
+      --azul-escuro: #003f7f;
+      --amarelo-sebrae: #ffcc00;
+      --branco: #ffffff;
+      --cinza: #f3f6fa;
+      --texto: #1f2933;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cinza);
+      color: var(--texto);
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: 90px 1fr 70px;
+    }
+
+    header {
+      background: var(--azul-sebrae);
+      color: var(--branco);
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 30px;
+      padding: 0 45px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 700;
+    }
+
+    .data-hora,
+    .tempo {
+      font-size: 24px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 25px;
+      padding: 30px 35px;
+    }
+
+    .painel-principal {
+      background: var(--branco);
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--amarelo-sebrae);
+      color: #111;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 22px;
+      margin-bottom: 25px;
+      width: fit-content;
+    }
+
+    .slide h2 {
+      font-size: 54px;
+      line-height: 1.08;
+      margin: 0 0 22px;
+      color: var(--azul-escuro);
+    }
+
+    .slide p {
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 0;
+      max-width: 950px;
+    }
+
+    .slide .destaque {
+      margin-top: 28px;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--azul-sebrae);
+    }
+
+    .lateral {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .card-qr {
+      background: var(--branco);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card-qr h3 {
+      font-size: 25px;
+      margin: 0 0 15px;
+      color: var(--azul-escuro);
+    }
+
+    .qr-placeholder {
+      width: 190px;
+      height: 190px;
+      margin: 0 auto 12px;
+      border: 4px dashed var(--azul-sebrae);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--azul-sebrae);
+      font-weight: 700;
+      font-size: 20px;
+      padding: 15px;
+    }
+
+    .card-qr p {
+      font-size: 19px;
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    footer {
+      background: var(--azul-escuro);
+      color: var(--branco);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 0 45px;
+      font-size: 25px;
+      font-weight: 600;
+    }
+
+    .marca {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .fade {
+      animation: fade 0.7s ease-in-out;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1100px) {
+      main {
+        grid-template-columns: 1fr 280px;
+      }
+
+      .slide h2 {
+        font-size: 42px;
+      }
+
+      .slide p {
+        font-size: 26px;
+      }
+
+      .qr-placeholder {
+        width: 160px;
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>TV Sebrae SAJ</h1>
+      <div class="tempo" id="tempo">Santo Antônio de Jesus • clima</div>
+      <div class="data-hora" id="dataHora"></div>
+    </header>
+
+    <main>
+      <section class="painel-principal">
+        <div id="slide" class="slide fade"></div>
+      </section>
+
+      <aside class="lateral">
+        <div class="card-qr">
+          <h3>Comunidade Sebrae</h3>
+          <div class="qr-placeholder">INSERIR<br>QR CODE</div>
+          <p>Receba conteúdos, eventos e oportunidades.</p>
+        </div>
+
+        <div class="card-qr">
+          <h3>App Sebrae</h3>
+          <div class="qr-placeholder">INSERIR<br>QR CODE</div>
+          <p>Serviços, cursos e soluções na palma da mão.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div id="rodape">Acompanhe nossa programação e participe dos próximos eventos.</div>
+      <div class="marca">SEBRAE</div>
+    </footer>
+  </div>
+
+  <script>
+    /*
+      COMO PERSONALIZAR:
+      1. Edite os textos abaixo em "slides".
+      2. Troque os QR Codes substituindo os blocos "qr-placeholder" por imagens.
+      3. Para clima automático, você pode incorporar depois um widget externo.
+      4. Para usar na TV, abra este arquivo no navegador e coloque em tela cheia.
+    */
+
+    const slides = [
+      {
+        tag: "Próximos eventos",
+        titulo: "Capacitações para fortalecer seu negócio",
+        texto: "Confira a agenda da semana e participe das ações do Sebrae em Santo Antônio de Jesus e região.",
+        destaque: "Aponte a câmera para o QR Code e entre na comunidade."
+      },
+      {
+        tag: "Dica rápida",
+        titulo: "MEI: fique atento ao DAS",
+        texto: "O pagamento em dia mantém seus benefícios previdenciários e evita pendências no CNPJ.",
+        destaque: "Regularidade também é estratégia de crescimento."
+      },
+      {
+        tag: "Oportunidade",
+        titulo: "Cursos gratuitos e conteúdos online",
+        texto: "Acesse soluções digitais do Sebrae para melhorar vendas, atendimento, finanças e gestão.",
+        destaque: "Conhecimento prático para aplicar no dia a dia."
+      },
+      {
+        tag: "Comunidade WhatsApp",
+        titulo: "Receba oportunidades direto no celular",
+        texto: "Na Comunidade Sebrae SAJ você acompanha eventos, cursos, avisos e conteúdos selecionados.",
+        destaque: "Informação útil, sem excesso de mensagens."
+      },
+      {
+        tag: "ASN Sebrae",
+        titulo: "Notícias para pequenos negócios",
+        texto: "Acompanhe tendências, dados e histórias de empreendedores na Agência Sebrae de Notícias.",
+        destaque: "Conteúdo confiável para quem empreende."
+      },
+      {
+        tag: "Atendimento",
+        titulo: "Precisa de orientação?",
+        texto: "Nossa equipe pode te ajudar com MEI, gestão, finanças, mercado, inovação e acesso a soluções.",
+        destaque: "Fale com o Sebrae."
+      }
+    ];
+
+    const mensagensRodape = [
+      "Entre na Comunidade Sebrae SAJ e receba oportunidades da região.",
+      "Conheça os próximos eventos e fortaleça seu negócio.",
+      "Acesse o App Sebrae e encontre soluções para sua empresa.",
+      "Sebrae: apoio para quem empreende, começa ou quer crescer."
+    ];
+
+    let slideAtual = 0;
+    let rodapeAtual = 0;
+
+    function atualizarDataHora() {
+      const agora = new Date();
+
+      const data = agora.toLocaleDateString("pt-BR", {
+        weekday: "short",
+        day: "2-digit",
+        month: "2-digit"
+      });
+
+      const hora = agora.toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      document.getElementById("dataHora").textContent = `${data} • ${hora}`;
+    }
+
+    function mostrarSlide() {
+      const item = slides[slideAtual];
+      const slide = document.getElementById("slide");
+
+      slide.classList.remove("fade");
+      void slide.offsetWidth;
+      slide.classList.add("fade");
+
+      slide.innerHTML = `
+        <span class="tag">${item.tag}</span>
+        <h2>${item.titulo}</h2>
+        <p>${item.texto}</p>
+        <div class="destaque">${item.destaque}</div>
+      `;
+
+      slideAtual = (slideAtual + 1) % slides.length;
+    }
+
+    function atualizarRodape() {
+      document.getElementById("rodape").textContent = mensagensRodape[rodapeAtual];
+      rodapeAtual = (rodapeAtual + 1) % mensagensRodape.length;
+    }
+
+    atualizarDataHora();
+    mostrarSlide();
+    atualizarRodape();
+
+    setInterval(atualizarDataHora, 1000);
+    setInterval(mostrarSlide, 25000);
+    setInterval(atualizarRodape, 12000);
+  </script>
+</body>
+</html>
