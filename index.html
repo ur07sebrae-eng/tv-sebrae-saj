@@ -131,7 +131,14 @@
       color: var(--azul-escuro);
     }
 
-    .qr-placeholder {
+    .qr-placeholder {.qr-img {
+  width: 190px;
+  height: 190px;
+  margin: 0 auto 12px;
+  object-fit: contain;
+  display: block;
+  border-radius: 12px;
+}
       width: 190px;
       height: 190px;
       margin: 0 auto 12px;
@@ -215,13 +222,13 @@
       <aside class="lateral">
         <div class="card-qr">
           <h3>Comunidade Sebrae</h3>
-          <div class="qr-placeholder">INSERIR<br>QR CODE</div>
+          <img class="qr-img" src="qr-comunidade.png" alt="QR Code Comunidade Sebrae">
           <p>Receba conteúdos, eventos e oportunidades.</p>
         </div>
 
         <div class="card-qr">
           <h3>App Sebrae</h3>
-          <div class="qr-placeholder">INSERIR<br>QR CODE</div>
+          <img class="qr-img" src="qr-app-sebrae.png" alt="QR Code App Sebrae">
           <p>Serviços, cursos e soluções na palma da mão.</p>
         </div>
       </aside>
